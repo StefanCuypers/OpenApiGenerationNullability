@@ -1,0 +1,81 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenApiGenerationNullability | v1",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/AppAdmin/applicationEnvironments": {
+      "get": {
+        "tags": [
+          "AppAdmin"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AmApplicationEnvironment"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AmApplication": {
+        "type": "object",
+        "properties": {
+          "translations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AmTranslation"
+            },
+            "nullable": true
+          }
+        },
+        "nullable": true
+      },
+      "AmApplicationEnvironment": {
+        "required": [
+          "application",
+          "environment"
+        ],
+        "type": "object",
+        "properties": {
+          "application": {
+            "$ref": "#/components/schemas/AmApplication"
+          },
+          "environment": {
+            "$ref": "#/components/schemas/AmEnvironment"
+          }
+        }
+      },
+      "AmEnvironment": {
+        "type": "object",
+        "properties": {
+          "translations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/#/properties/application/properties/translations/items"
+            },
+            "nullable": true
+          }
+        },
+        "nullable": true
+      },
+      "AmTranslation": {
+        "type": "object"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AppAdmin"
+    }
+  ]
+}
